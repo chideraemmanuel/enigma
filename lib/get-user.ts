@@ -1,7 +1,8 @@
 import { getSession } from '@/data/DAL';
-import User, { UserInterface } from '@/models/user';
+import User, { UserInterface, UserSchemaInterface } from '@/models/user';
 import { cache } from 'react';
 import connectToDatabase from './connectToDatabase';
+import { ObjectId } from 'mongoose';
 
 const getUser = cache(async () => {
   try {
@@ -10,11 +11,16 @@ const getUser = cache(async () => {
 
     if (!session) return null;
 
-    const user = await User.findById<UserInterface>(session.user_id);
+    const user = await User.findById<UserSchemaInterface>(session.user_id);
 
     if (!user) return null;
 
-    return user;
+    return {
+      _id: user._id as ObjectId,
+      username: user.username,
+      email: user.email,
+    };
+    // return user;
   } catch (error: any) {
     console.log('[USER_FETCH_ERROR]', error);
 

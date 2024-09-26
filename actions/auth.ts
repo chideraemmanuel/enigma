@@ -35,7 +35,7 @@ export const registerUser = async (previousState: any, formData: FormData) => {
       .object({
         username: z
           .string()
-          .nonempty('Username is required')
+          .min(1, 'Username is required')
           //   .min(3, 'Username is too short')
           //   .max(15, 'Username is too long')
           .refine(
@@ -44,12 +44,12 @@ export const registerUser = async (previousState: any, formData: FormData) => {
           ),
         password: z
           .string()
-          .nonempty('Password is required')
+          .min(1, 'Password is required')
           .refine(
             (value) => PASSWORD_REGEX.test(value),
             'Password must be 8-16 characters long, and contain at least one numeric digit, and special character'
           ),
-        confirm_password: z.string().nonempty('Please confirm your password'),
+        confirm_password: z.string().min(1, 'Please confirm your password'),
       })
       .refine((data) => data.password === data.confirm_password, {
         path: ['confirm_password'],
@@ -131,8 +131,8 @@ export const loginUser = async (previousState: any, formData: FormData) => {
     const formDataObject = Object.fromEntries(formData);
 
     const schema = z.object({
-      username: z.string().nonempty('Please enter your username or email'),
-      password: z.string().nonempty('Please enter your password'),
+      username: z.string().min(1, 'Please enter your username or email'),
+      password: z.string().min(1, 'Please enter your password'),
     });
 
     const { success, error, data } = schema.safeParse(formDataObject);
@@ -192,7 +192,7 @@ export const logoutUser = async (previousState: any) => {
 
     if (!session) {
       return {
-        error: 'No active session was found. No user is already in.',
+        error: 'No active session was found. No user is logged in.',
       };
     }
 

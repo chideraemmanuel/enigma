@@ -30,7 +30,7 @@ const ProfileHeader: FC<Props> = ({ avatar }) => {
 
   return (
     <>
-      <header className="border-b h-14 md:h-[70px] sticky top-0 bg-background">
+      <header className="border-b h-14 md:h-[70px] sticky top-0 z-20 bg-background">
         <div className="md:container px-3 h-full flex items-center gap-5">
           <div className="flex-1 flex items-center gap-4 md:gap-10">
             <span className="text-lg md:text-xl font-semibold font-geistMono">
@@ -39,7 +39,7 @@ const ProfileHeader: FC<Props> = ({ avatar }) => {
 
             <ul className="flex items-center gap-2 md:gap-3">
               {NAVIGATION_LINKS.map((link, index) => (
-                <li>
+                <li key={index}>
                   <Link
                     href={link.href}
                     className={cn(

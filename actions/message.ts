@@ -17,7 +17,7 @@ export const sendMessage = async (
 
   const { success, error, data } = z
     .string()
-    .nonempty('Enter a message')
+    .min(1, 'Enter a message')
     .min(3, 'Message is too short')
     .safeParse(message);
 
