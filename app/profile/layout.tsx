@@ -1,11 +1,23 @@
 import ProfileHeader from '@/containers/profile-header';
+import { getSession } from '@/data/DAL';
+import connectToDatabase from '@/lib/connectToDatabase';
+import { redirect, RedirectType } from 'next/navigation';
 import { FC } from 'react';
 
 interface Props {
   children: React.ReactNode;
 }
 
-const ProfileLayout: FC<Props> = ({ children }) => {
+const ProfileLayout: FC<Props> = async ({ children }) => {
+  await connectToDatabase();
+  const session = await getSession();
+
+  console.log('sessionnnn', session);
+
+  if (!session) {
+    redirect('/auth/login', RedirectType.replace);
+  }
+
   return (
     <>
       <ProfileHeader />

@@ -1,10 +1,20 @@
+import { getSession } from '@/data/DAL';
+import connectToDatabase from '@/lib/connectToDatabase';
+import { redirect, RedirectType } from 'next/navigation';
 import { FC } from 'react';
 
 interface Props {
   children: React.ReactNode;
 }
 
-const AuthPagesLayout: FC<Props> = ({ children }) => {
+const AuthPagesLayout: FC<Props> = async ({ children }) => {
+  await connectToDatabase();
+  const session = await getSession();
+
+  if (session) {
+    redirect('/profile', RedirectType.replace);
+  }
+
   return (
     <>
       <div className="flex items-center justify-center bg-purple-300 px-4 py-14 min-h-screen">

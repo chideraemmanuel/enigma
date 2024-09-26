@@ -8,12 +8,12 @@ import { FC } from 'react';
 interface Props {}
 
 const RegistrationPage: FC<Props> = async () => {
-  await connectToDatabase();
-  const session = await getSession();
+  // await connectToDatabase();
+  // const session = await getSession();
 
-  if (session) {
-    redirect('/profile', RedirectType.replace);
-  }
+  // if (session) {
+  //   redirect('/profile', RedirectType.replace);
+  // }
 
   return (
     <>

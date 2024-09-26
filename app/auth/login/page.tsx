@@ -1,5 +1,6 @@
 import FormInput from '@/components/form-input';
 import { Button } from '@/components/ui/button';
+import LoginForm from '@/containers/login-form';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { FC } from 'react';
@@ -25,27 +26,7 @@ const LoginPage: FC<Props> = () => {
         </header>
 
         {/* form */}
-        <form className="flex flex-col gap-5 mb-3">
-          <FormInput
-            label="Username/Email"
-            placeholder="Enter your username or email"
-          />
-
-          <FormInput
-            label="Password"
-            placeholder="Enter your password"
-            type="password"
-            addForgotPassword
-            passwordResetInitiationHref="/auth/reset-password/initiate"
-          />
-
-          <div className="mt-5">
-            <Button className="w-full h-12 text-base">
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Login
-            </Button>
-          </div>
-        </form>
+        <LoginForm />
 
         <p className="text-center text-sm text-muted-foreground">
           Don't have an account?{' '}

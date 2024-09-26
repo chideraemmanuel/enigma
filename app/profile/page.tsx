@@ -1,15 +1,26 @@
 import { Button } from '@/components/ui/button';
+import getUser from '@/lib/get-user';
+import { redirect } from 'next/navigation';
 import { FC } from 'react';
 
 interface Props {}
 
-const ProfilePage: FC<Props> = () => {
+const ProfilePage: FC<Props> = async () => {
+  const user = await getUser();
+
+  console.log('userrrrrr', user);
+
+  if (!user) {
+    redirect('/auth/login');
+  }
+
   return (
     <>
       <div className="py-5 md:py-7 flex flex-col min-h-[calc(100vh-56px)] md:min-h-[calc(100vh-70px)]">
         <div className="pb-4 md:pb-5">
           <span className="inline-block pb-1 md:pb-2 font-bold text-xl sm:text-2xl md:text-3xl">
-            Welcome, Chidera. 👋🏾
+            {/* Welcome, Chidera. 👋🏾 */}
+            Welcome, {user.username}. 👋🏾
           </span>
 
           <h1 className="text-muted-foreground font-medium text-sm sm:text-base">
@@ -27,7 +38,8 @@ const ProfilePage: FC<Props> = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-7">
             <div className="flex items-center justify-between gap-5 p-3 md:p-5 h-16 md:h-20 border border-primary rounded-full">
               <span className="w-[80%] truncate text-sm md:text-base">
-                https://enigma.vercel.app/chidera
+                {/* https://enigma.vercel.app/chidera */}
+                https://enigma.vercel.app/{user.username}
               </span>
               <Button className="px-3 md:px-3">Copy link</Button>
             </div>
