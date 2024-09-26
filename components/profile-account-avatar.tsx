@@ -12,7 +12,7 @@ const ProfileAccountAvatar: FC<Props> = async () => {
     <>
       <Avatar className="h-8 md:h-10 w-8 md:w-10">
         <AvatarFallback className="text-sm md:text-base">
-          {user?.username.charAt(1).toUpperCase()}
+          {user?.username.charAt(0).toUpperCase()}
         </AvatarFallback>
       </Avatar>
     </>

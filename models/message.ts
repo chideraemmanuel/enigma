@@ -1,20 +1,20 @@
 import mongoose, { Document, model, models, ObjectId, Schema } from 'mongoose';
 
 export interface MessageInterface extends Pick<Document, '_id'> {
-  user: ObjectId;
+  user_id: ObjectId;
   message: string;
   getsDeletedAt: Date;
 }
 
 export interface MessageSchemaInterface extends Document {
-  user: ObjectId;
+  user_id: ObjectId;
   message: string;
   getsDeletedAt: Date;
 }
 
 const messageSchema: Schema<MessageSchemaInterface> = new Schema(
   {
-    user: {
+    user_id: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
       required: true,
