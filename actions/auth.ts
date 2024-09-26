@@ -168,8 +168,8 @@ export const loginUser = async (previousState: any, formData: FormData) => {
 
     cookies().set('session_id', new_session_id); // TODO: add options
 
-    revalidatePath('/auth/login');
-    revalidatePath('/profile');
+    // revalidatePath('/auth/login');
+    // revalidatePath('/profile');
     // redirect('/profile');
     // return { success: true, data: user.toObject() };
     return { success: true, data: user };
@@ -178,5 +178,33 @@ export const loginUser = async (previousState: any, formData: FormData) => {
     return {
       error: 'Something went wrong.',
     };
+  }
+};
+
+export const logoutUser = async (previousState: any) => {
+  try {
+    console.log('connecting to database...');
+    await connectToDatabase();
+    console.log('connected to database!');
+    const session = await getSession();
+
+    console.log('session', session);
+
+    if (!session) {
+      return {
+        error: 'No active session was found. No user is already in.',
+      };
+    }
+
+    await Session.deleteOne({ session_id: session.session_id });
+
+    cookies().delete('session_id');
+
+    //  revalidatePath('/auth/login');
+    // revalidatePath('/profile');
+    return { success: true };
+  } catch (error: any) {
+    console.log('[LOGOUT_ERROR]', error);
+    return { error: 'An error occured while logging out' };
   }
 };

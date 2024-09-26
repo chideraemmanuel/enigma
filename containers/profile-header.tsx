@@ -1,16 +1,31 @@
 'use client';
 
+import { logoutUser } from '@/actions/auth';
+import FullScreenSpinner from '@/components/full-screen-spinner';
+import ProfileAccountAvatar from '@/components/profile-account-avatar';
+import ProfileAccountButton from '@/components/profile-account-button';
 import ThemeSwitcher from '@/components/theme-switcher';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { NAVIGATION_LINKS } from '@/constants';
 import { cn } from '@/lib/helpers/cn';
+import { LogOutIcon, User2, User2Icon } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { FC } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { FC, useEffect } from 'react';
+import { useFormState, useFormStatus } from 'react-dom';
+import { toast } from 'sonner';
 
-interface Props {}
+interface Props {
+  avatar: React.ReactNode;
+}
 
-const ProfileHeader: FC<Props> = () => {
+const ProfileHeader: FC<Props> = ({ avatar }) => {
   const pathname = usePathname();
 
   return (
@@ -42,11 +57,7 @@ const ProfileHeader: FC<Props> = () => {
           <div className="flex gap-2 md:gap-2">
             <ThemeSwitcher />
 
-            <Avatar className="h-8 md:h-10 w-8 md:w-10">
-              <AvatarFallback className="text-sm md:text-base">
-                C
-              </AvatarFallback>
-            </Avatar>
+            <ProfileAccountButton avatar={avatar} />
           </div>
         </div>
       </header>
