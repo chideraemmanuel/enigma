@@ -1,5 +1,17 @@
+'use client';
+
+import dynamic from 'next/dynamic';
 import { FC } from 'react';
-import { ThemeProvider } from './theme-provider';
+// import { ThemeProvider } from './theme-provider';
+import { Toaster } from 'sonner';
+
+const ThemeProvider = dynamic(
+  () =>
+    import('@/providers/theme-provider').then((module) => module.ThemeProvider),
+  {
+    ssr: false,
+  }
+);
 
 interface Props {
   children: React.ReactNode;
@@ -8,7 +20,10 @@ interface Props {
 const Providers: FC<Props> = ({ children }) => {
   return (
     <>
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <Toaster richColors position="top-center" />
+        {children}
+      </ThemeProvider>
     </>
   );
 };

@@ -1,12 +1,20 @@
-import FormInput from '@/components/form-input';
-import { Button } from '@/components/ui/button';
-import { Loader2 } from 'lucide-react';
+import RegistrationForm from '@/containers/registration-form';
+import { getSession } from '@/data/DAL';
+import connectToDatabase from '@/lib/connectToDatabase';
 import Link from 'next/link';
+import { redirect, RedirectType } from 'next/navigation';
 import { FC } from 'react';
 
 interface Props {}
 
-const RegistrationPage: FC<Props> = () => {
+const RegistrationPage: FC<Props> = async () => {
+  await connectToDatabase();
+  const session = await getSession();
+
+  if (session) {
+    redirect('/profile', RedirectType.replace);
+  }
+
   return (
     <>
       <div className="px-4 sm:px-6 py-10 sm:py-12">
@@ -25,28 +33,7 @@ const RegistrationPage: FC<Props> = () => {
         </header>
 
         {/* form */}
-        <form className="flex flex-col gap-5 mb-3">
-          <FormInput label="Username" placeholder="e.g johndoe" />
-
-          <FormInput
-            label="Password"
-            placeholder="Enter your password"
-            type="password"
-          />
-
-          <FormInput
-            label="Confirm password"
-            placeholder="Confirm your password"
-            type="password"
-          />
-
-          <div className="mt-5">
-            <Button className="w-full h-12 text-base">
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Create account
-            </Button>
-          </div>
-        </form>
+        <RegistrationForm />
 
         <p className="text-center text-sm text-muted-foreground">
           Already have an account?{' '}
