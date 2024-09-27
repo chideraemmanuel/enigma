@@ -98,7 +98,10 @@ export const registerUser = async (previousState: any, formData: FormData) => {
       session_id: new_session_id,
     });
 
-    cookies().set('session_id', new_session_id); // TODO: add options
+    cookies().set('session_id', new_session_id, {
+      maxAge: 60 * 60, // 1 hour
+      httpOnly: true,
+    });
 
     // redirect('/profile');
     // return { success: true, data: user.toObject() };
@@ -166,7 +169,10 @@ export const loginUser = async (previousState: any, formData: FormData) => {
       session_id: new_session_id,
     });
 
-    cookies().set('session_id', new_session_id); // TODO: add options
+    cookies().set('session_id', new_session_id, {
+      maxAge: 60 * 60, // 1 hour
+      httpOnly: true,
+    });
 
     // revalidatePath('/auth/login');
     // revalidatePath('/profile');

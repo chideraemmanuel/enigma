@@ -79,6 +79,7 @@ const PasswordUpdateForm: FC<Props> = () => {
 
     if (state?.success) {
       toast.success('Update successful');
+      //   TODO: reset form state
       // router.refresh();
     }
   }, [state]);

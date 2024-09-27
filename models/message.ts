@@ -4,6 +4,7 @@ export interface MessageInterface extends Pick<Document, '_id'> {
   user_id: ObjectId;
   message: string;
   getsDeletedAt: Date;
+  createdAt: Date;
 }
 
 export interface MessageSchemaInterface extends Document {

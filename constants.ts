@@ -19,3 +19,5 @@ export const EMAIL_REGEX =
   /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,5})(\.[a-z]{2,5})?$/;
 
 export const PASSWORD_REGEX = /^(?=.*[0-9])(?=.*[a-z])(?=.*\W)(?!.* ).{8,16}$/;
+
+export const messagesFetchLimit = 12;

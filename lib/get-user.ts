@@ -13,7 +13,7 @@ const getUser = cache(async () => {
 
     const user = await User.findById<UserSchemaInterface>(session.user_id);
 
-    if (!user) return null;
+    if (!user) return null; // TODO: delete cookie..?
 
     return {
       _id: user._id as ObjectId,

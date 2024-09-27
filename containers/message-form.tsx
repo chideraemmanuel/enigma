@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 import { ObjectId } from 'mongoose';
 import { useRouter } from 'next/navigation';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { toast } from 'sonner';
 
@@ -20,6 +20,8 @@ const MessageForm: FC<Props> = ({ userId }) => {
 
   const router = useRouter();
 
+  const ref = useRef<HTMLTextAreaElement>(null);
+
   useEffect(() => {
     if (state?.error) {
       // console.log('state.error', state.error);
@@ -28,6 +30,9 @@ const MessageForm: FC<Props> = ({ userId }) => {
 
     if (state?.success) {
       toast.success('Message sent successfully');
+      if (ref.current?.value) {
+        ref.current.value = '';
+      }
 
       setTimeout(() => {
         console.log('redirect now!');
@@ -44,6 +49,7 @@ const MessageForm: FC<Props> = ({ userId }) => {
           placeholder="Type your message here"
           name="message"
           error={state?.errors?.[0]}
+          ref={ref}
         />
 
         <SubmitButton />

@@ -57,6 +57,7 @@ const PersonalDetailsUpdateForm: FC<Props> = ({ username, email }) => {
 
     if (state?.success) {
       toast.success('Update successful');
+      //   TODO: reset form state
       // router.refresh();
     }
   }, [state]);
