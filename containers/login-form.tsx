@@ -23,11 +23,11 @@ const LoginForm: FC<Props> = () => {
       toast.error(state.error);
     }
 
-    // if (state?.success) {
-    //   // console.log('state.user', state.data);
-    //   toast.success('Login successful');
-    //   router.replace('/profile');
-    // }
+    if (state?.success) {
+      // console.log('state.user', state.data);
+      toast.success('Login successful');
+      router.replace('/profile');
+    }
   }, [state]);
 
   return (

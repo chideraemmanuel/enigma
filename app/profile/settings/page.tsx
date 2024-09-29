@@ -1,9 +1,12 @@
 import FormInput from '@/components/form-input';
+import SessionUpdater from '@/components/session-updater';
 import { Button } from '@/components/ui/button';
 import PasswordUpdateForm from '@/containers/password-update-form';
 import PersonalDetailsUpdateForm from '@/containers/personal-details-update-form';
 import getUser from '@/lib/get-user';
 import { cn } from '@/lib/helpers/cn';
+import { updateSession } from '@/lib/session';
+import updateSessionViaAPI from '@/lib/update-session-via-api';
 import { Loader2 } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { FC } from 'react';
@@ -19,8 +22,11 @@ const SettingsPage: FC<Props> = async () => {
     redirect('/auth/login');
   }
 
+  // await updateSessionViaAPI();
+
   return (
     <>
+      <SessionUpdater />
       <div className="py-5 md:py-7 flex flex-col min-h-[calc(100vh-56px)] md:min-h-[calc(100vh-70px)]">
         <div className="pb-4 md:pb-5">
           {/* <span className="block pb-1 md:pb-2 text-muted-foreground font-medium text-sm sm:text-base">

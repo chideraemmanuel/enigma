@@ -1,3 +1,4 @@
+import SessionUpdater from '@/components/session-updater';
 import {
   Card,
   CardContent,
@@ -9,6 +10,8 @@ import {
 import { messagesFetchLimit } from '@/constants';
 import LoadMoreMessages from '@/containers/load-more-messages';
 import getUser from '@/lib/get-user';
+import { updateSession } from '@/lib/session';
+import updateSessionViaAPI from '@/lib/update-session-via-api';
 import Message, { MessageInterface } from '@/models/message';
 import { redirect } from 'next/navigation';
 import { FC } from 'react';
@@ -18,16 +21,17 @@ interface Props {}
 const MessagesPage: FC<Props> = async () => {
   const user = await getUser();
 
-  console.log('userrrrrr', user);
-
   if (!user) {
     redirect('/auth/login');
   }
+
+  // await updateSessionViaAPI();
 
   const messages = await Message.find<MessageInterface>({ user_id: user._id })
     // .skip((1 - 1) * 2)
     .limit(messagesFetchLimit)
     .sort({ createdAt: -1 })
+
     .exec();
 
   // total_records
@@ -48,6 +52,7 @@ const MessagesPage: FC<Props> = async () => {
 
   return (
     <>
+      <SessionUpdater />
       <div className="py-5 md:py-7 flex flex-col min-h-[calc(100vh-56px)] md:min-h-[calc(100vh-70px)]">
         <div className="pb-4 md:pb-5">
           <span className="block pb-1 md:pb-2 text-muted-foreground font-medium text-sm sm:text-base">
@@ -69,7 +74,7 @@ const MessagesPage: FC<Props> = async () => {
 
           {messages.length === 0 ? (
             <div className="flex-1 w-full h-full flex items-center justify-center">
-              <p>You do not hav any messages</p>
+              <p>You do not have any messages</p>
             </div>
           ) : (
             <>

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import connectToDatabase from '@/lib/connectToDatabase';
+import connectToDatabase from '@/lib/connect-to-database';
 import getUser from '@/lib/get-user';
 
 interface Props {}

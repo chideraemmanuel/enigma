@@ -1,8 +1,8 @@
 import ProfileAccountAvatar from '@/components/profile-account-avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 import ProfileHeader from '@/containers/profile-header';
-import { getSession } from '@/data/DAL';
-import connectToDatabase from '@/lib/connectToDatabase';
+import { getSession } from '@/lib/session';
+import connectToDatabase from '@/lib/connect-to-database';
 import { redirect, RedirectType } from 'next/navigation';
 import { FC, Suspense } from 'react';
 
@@ -11,15 +11,15 @@ interface Props {
 }
 
 const ProfileLayout: FC<Props> = async ({ children }) => {
-  await connectToDatabase();
-  const session = await getSession();
+  // await connectToDatabase();
+  // const session = await getSession();
 
-  console.log('sessionnnn', session);
+  // console.log('sessionnnn', session);
 
-  if (!session) {
-    console.log('redirectttttttttt');
-    redirect('/auth/login', RedirectType.replace);
-  }
+  // if (!session) {
+  //   console.log('redirectttttttttt');
+  //   redirect('/auth/login', RedirectType.replace);
+  // }
 
   return (
     <>

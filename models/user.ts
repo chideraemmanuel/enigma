@@ -5,12 +5,14 @@ export interface UserInterface extends Pick<Document, '_id'> {
   username: string;
   email: string | null;
   password: string;
+  completed_onboarding: boolean;
 }
 
 export interface UserSchemaInterface extends Document {
   username: string;
   email: string | null;
   password: string;
+  completed_onboarding: boolean;
 }
 
 const userSchema: Schema<UserSchemaInterface> = new Schema(
@@ -27,6 +29,10 @@ const userSchema: Schema<UserSchemaInterface> = new Schema(
       type: String,
       required: true,
       select: false,
+    },
+    completed_onboarding: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

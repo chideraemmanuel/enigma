@@ -2,9 +2,9 @@
 
 import { z } from 'zod';
 import { EMAIL_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from '../constants';
-import { getSession } from '@/data/DAL';
+import { getSession } from '@/lib/session';
 import User, { UserInterface, UserSchemaInterface } from '@/models/user';
-import connectToDatabase from '@/lib/connectToDatabase';
+import connectToDatabase from '@/lib/connect-to-database';
 import { nanoid } from 'nanoid';
 import Session from '@/models/session';
 import { cookies } from 'next/headers';
@@ -149,7 +149,6 @@ export const loginUser = async (previousState: any, formData: FormData) => {
     const user = await User.findOne<UserInterface>({
       $or: [{ username }, { email: username }],
     }).select('+password');
-
     if (!user) {
       return { error: 'No user with the supplied username or email' };
     }
@@ -177,8 +176,7 @@ export const loginUser = async (previousState: any, formData: FormData) => {
     // revalidatePath('/auth/login');
     // revalidatePath('/profile');
     // redirect('/profile');
-    // return { success: true, data: user.toObject() };
-    return { success: true, data: user };
+    return { success: true };
   } catch (error: any) {
     console.log('[SERVER_ACTION_ERROR]', error);
     return {

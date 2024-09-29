@@ -1,9 +1,10 @@
 import RegistrationForm from '@/containers/registration-form';
-import { getSession } from '@/data/DAL';
-import connectToDatabase from '@/lib/connectToDatabase';
+import { getSession } from '@/lib/session';
+import connectToDatabase from '@/lib/connect-to-database';
 import Link from 'next/link';
 import { redirect, RedirectType } from 'next/navigation';
 import { FC } from 'react';
+import getUser from '@/lib/get-user';
 
 interface Props {}
 
@@ -12,6 +13,12 @@ const RegistrationPage: FC<Props> = async () => {
   // const session = await getSession();
 
   // if (session) {
+  //   redirect('/profile', RedirectType.replace);
+  // }
+
+  // const user = await getUser();
+
+  // if (user) {
   //   redirect('/profile', RedirectType.replace);
   // }
 

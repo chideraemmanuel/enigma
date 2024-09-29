@@ -1,5 +1,9 @@
+import SessionUpdater from '@/components/session-updater';
 import { Button } from '@/components/ui/button';
+import AddEmailDialog from '@/containers/add-email-dialog';
 import getUser from '@/lib/get-user';
+import { updateSession } from '@/lib/session';
+import updateSessionViaAPI from '@/lib/update-session-via-api';
 import { redirect } from 'next/navigation';
 import { FC } from 'react';
 
@@ -8,14 +12,17 @@ interface Props {}
 const ProfilePage: FC<Props> = async () => {
   const user = await getUser();
 
-  console.log('userrrrrr', user);
-
   if (!user) {
     redirect('/auth/login');
   }
 
+  // await updateSessionViaAPI();
+
   return (
     <>
+      <SessionUpdater />
+      <AddEmailDialog showDialog={!user.completed_onboarding} />
+
       <div className="py-5 md:py-7 flex flex-col min-h-[calc(100vh-56px)] md:min-h-[calc(100vh-70px)]">
         <div className="pb-4 md:pb-5">
           <span className="inline-block pb-1 md:pb-2 font-bold text-xl sm:text-2xl md:text-3xl">

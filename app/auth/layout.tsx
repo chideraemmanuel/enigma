@@ -1,5 +1,5 @@
-import { getSession } from '@/data/DAL';
-import connectToDatabase from '@/lib/connectToDatabase';
+import { getSession } from '@/lib/session';
+import connectToDatabase from '@/lib/connect-to-database';
 import { redirect, RedirectType } from 'next/navigation';
 import { FC } from 'react';
 
@@ -8,12 +8,12 @@ interface Props {
 }
 
 const AuthPagesLayout: FC<Props> = async ({ children }) => {
-  await connectToDatabase();
-  const session = await getSession();
+  // await connectToDatabase();
+  // const session = await getSession();
 
-  if (session) {
-    redirect('/profile', RedirectType.replace);
-  }
+  // if (session) {
+  //   redirect('/profile', RedirectType.replace);
+  // }
 
   return (
     <>

@@ -5,7 +5,7 @@ import FormInput from '@/components/form-input';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/helpers/cn';
 import { Loader2 } from 'lucide-react';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { toast } from 'sonner';
 
@@ -27,6 +27,8 @@ const passwordRequirements = [
 interface Props {}
 
 const PasswordUpdateForm: FC<Props> = () => {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [state, action] = useFormState(updateProfile, null);
 
   // const validate = (requirement: Requirement) => {
@@ -78,9 +80,10 @@ const PasswordUpdateForm: FC<Props> = () => {
     }
 
     if (state?.success) {
-      toast.success('Update successful');
-      //   TODO: reset form state
-      // router.refresh();
+      toast.success('Password updated successful');
+      //  reset form state
+      setPassword('');
+      setConfirmPassword('');
     }
   }, [state]);
 
@@ -94,6 +97,8 @@ const PasswordUpdateForm: FC<Props> = () => {
             type="password"
             placeholder="Enter your password"
             name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             error={state?.errors?.password?.[0]}
           />
 
@@ -103,6 +108,8 @@ const PasswordUpdateForm: FC<Props> = () => {
             name="confirm_password"
             type="password"
             placeholder="Enter your password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             error={state?.errors?.confirm_password?.[0]}
           />
 

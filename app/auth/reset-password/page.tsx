@@ -1,12 +1,20 @@
 import FormInput from '@/components/form-input';
 import { Button } from '@/components/ui/button';
+import getUser from '@/lib/get-user';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { redirect, RedirectType } from 'next/navigation';
 import { FC } from 'react';
 
 interface Props {}
 
-const PassowordResetCompletionPage: FC<Props> = () => {
+const PassowordResetCompletionPage: FC<Props> = async () => {
+  // const user = await getUser();
+
+  // if (user) {
+  //   redirect('/profile', RedirectType.replace);
+  // }
+
   return (
     <>
       <div className="px-4 sm:px-6 py-10 sm:py-12">

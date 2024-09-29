@@ -1,7 +1,7 @@
-import { getSession } from '@/data/DAL';
+import { getSession } from '@/lib/session';
 import User, { UserInterface, UserSchemaInterface } from '@/models/user';
 import { cache } from 'react';
-import connectToDatabase from './connectToDatabase';
+import connectToDatabase from './connect-to-database';
 import { ObjectId } from 'mongoose';
 
 const getUser = cache(async () => {
@@ -15,12 +15,14 @@ const getUser = cache(async () => {
 
     if (!user) return null; // TODO: delete cookie..?
 
-    return {
-      _id: user._id as ObjectId,
-      username: user.username,
-      email: user.email,
-    };
-    // return user;
+    // return {
+    //   _id: user._id as ObjectId,
+    //   username: user.username,
+    //   email: user.email,
+    //   completed_onboarding: user.completed_onboarding,
+    // };
+
+    return user;
   } catch (error: any) {
     console.log('[USER_FETCH_ERROR]', error);
 

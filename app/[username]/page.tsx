@@ -1,7 +1,7 @@
 import TextareaInput from '@/components/textarea-input';
 import { Button } from '@/components/ui/button';
 import MessageForm from '@/containers/message-form';
-import connectToDatabase from '@/lib/connectToDatabase';
+import connectToDatabase from '@/lib/connect-to-database';
 import User, { UserInterface, UserSchemaInterface } from '@/models/user';
 import { Loader2 } from 'lucide-react';
 import { notFound } from 'next/navigation';

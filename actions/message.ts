@@ -1,8 +1,8 @@
 'use server';
 
 import { messagesFetchLimit } from '@/constants';
-import { getSession } from '@/data/DAL';
-import connectToDatabase from '@/lib/connectToDatabase';
+import { getSession, updateSession } from '@/lib/session';
+import connectToDatabase from '@/lib/connect-to-database';
 import Message, { MessageInterface } from '@/models/message';
 import { z } from 'zod';
 
@@ -59,11 +59,14 @@ export const getMessages = async (
       return { error: 'Unauthorized' };
     }
 
+    await updateSession();
+
     const data = await Message.find<MessageInterface>({
       user_id: session.user_id,
     })
       .skip((pageNumber - 1) * limitNumber)
       .limit(limitNumber)
+
       .exec();
 
     // total_records

@@ -29,7 +29,7 @@ const MessageForm: FC<Props> = ({ userId }) => {
     }
 
     if (state?.success) {
-      toast.success('Message sent successfully');
+      toast.success(`Message sent successfully! Now it's your turn`);
       if (ref.current?.value) {
         ref.current.value = '';
       }
