@@ -20,9 +20,13 @@ const userSchema: Schema<UserSchemaInterface> = new Schema(
     username: {
       type: String,
       required: true,
+      lowercase: true,
+      trim: true,
     },
     email: {
       type: String,
+      lowercase: true,
+      trim: true,
       default: null,
     },
     password: {

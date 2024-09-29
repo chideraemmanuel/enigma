@@ -11,6 +11,8 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import bcrypt from 'bcrypt';
 import { revalidatePath } from 'next/cache';
+import PasswordReset, { PasswordResetInterface } from '@/models/password-reset';
+import sendEmail from '@/lib/send-email';
 
 export const registerUser = async (previousState: any, formData: FormData) => {
   try {
@@ -38,6 +40,8 @@ export const registerUser = async (previousState: any, formData: FormData) => {
           .min(1, 'Username is required')
           //   .min(3, 'Username is too short')
           //   .max(15, 'Username is too long')
+          .toLowerCase()
+          .trim()
           .refine(
             (value) => USERNAME_REGEX.test(value),
             'Username must be between 3-15 characters, and can only contain letters and numbers'
@@ -134,7 +138,11 @@ export const loginUser = async (previousState: any, formData: FormData) => {
     const formDataObject = Object.fromEntries(formData);
 
     const schema = z.object({
-      username: z.string().min(1, 'Please enter your username or email'),
+      username: z
+        .string()
+        .min(1, 'Please enter your username or email')
+        .toLowerCase()
+        .trim(),
       password: z.string().min(1, 'Please enter your password'),
     });
 
@@ -149,6 +157,7 @@ export const loginUser = async (previousState: any, formData: FormData) => {
     const user = await User.findOne<UserInterface>({
       $or: [{ username }, { email: username }],
     }).select('+password');
+
     if (!user) {
       return { error: 'No user with the supplied username or email' };
     }
@@ -210,5 +219,191 @@ export const logoutUser = async (previousState: any) => {
   } catch (error: any) {
     console.log('[LOGOUT_ERROR]', error);
     return { error: 'An error occured while logging out' };
+  }
+};
+
+export const initiatePasswordReset = async (
+  previousState: any,
+  formData: FormData
+) => {
+  try {
+    console.log('previousState', previousState);
+    // verify session..?
+    console.log('connecting to database...');
+    await connectToDatabase();
+    console.log('connected to database!');
+    const session = await getSession();
+
+    console.log('session', session);
+
+    if (session) {
+      return {
+        error: 'An active session was found. A user is already logged in.',
+      };
+    }
+
+    const username = formData.get('username');
+
+    const { success, error, data } = z
+      .string()
+      .min(1, 'Please enter your username or email')
+      .toLowerCase()
+      .trim()
+      .safeParse(username);
+
+    if (!success) {
+      return { inputError: error.format()._errors[0] };
+    }
+
+    const user = await User.findOne<UserInterface>({
+      $or: [{ username }, { email: username }],
+    });
+
+    if (!user) {
+      return { error: 'No user with the supplied username or email' };
+    }
+
+    if (user && !user.email) {
+      return { error: 'No email address was added to your profile' };
+    }
+
+    // CHECK IF PASSWORD RESET RECORD EXISTS. DELETE, IF ANY!
+    const passwordResetRecord = await PasswordReset.findOne({
+      user_id: user._id,
+    });
+
+    if (passwordResetRecord) {
+      await PasswordReset.deleteOne({ user_id: user._id });
+    }
+
+    const reset_string = nanoid();
+
+    // CREATE NEW PASSWORD RESET RECORD
+    const newPasswordResetRecord = await PasswordReset.create({
+      user_id: user._id,
+      reset_string,
+    });
+
+    // SEND EMAIL!
+    await sendEmail({
+      receipent: user.email as string,
+      subject: 'Password Reset',
+      html: `Click <a href={http://locahost:3000/auth/reset-password?email=${encodeURIComponent(
+        user.email as string
+      )}&reset_string=${reset_string}}></a>`,
+    });
+
+    return { success: `Reset mail has been sent to ${user.email}` };
+  } catch (error: any) {
+    console.log('[PASSWORD_RESET_INITIATION_ERROR]', error);
+    return { error: 'Something went wrong' };
+  }
+};
+
+interface PasswordResetCredentials {
+  email: string;
+  reset_string: string;
+}
+
+export const resetPassword = async (
+  credentials: PasswordResetCredentials,
+  previousState: any,
+  formData: FormData
+) => {
+  const { email, reset_string } = credentials;
+
+  try {
+    console.log('previousState', previousState);
+    // verify session..?
+    console.log('connecting to database...');
+    await connectToDatabase();
+    console.log('connected to database!');
+    const session = await getSession();
+
+    console.log('session', session);
+
+    if (session) {
+      return {
+        error: 'An active session was found. A user is already logged in.',
+      };
+    }
+
+    // receives email and reset_string; verify email
+    const user = await User.findOne<UserSchemaInterface>({ email }).select(
+      '+password'
+    );
+
+    if (!user) {
+      return { error: 'No user with the supplied email address' };
+    }
+
+    // check if password reset record (still) exists (will be checked on page load too. this is just in case)
+    const passwordResetRecord =
+      await PasswordReset.findOne<PasswordResetInterface>({
+        user_id: user._id,
+      });
+
+    if (!passwordResetRecord) {
+      return {
+        error:
+          'Password reset record does not exist or has expired. Please request a new password reset email',
+      };
+    }
+
+    // compare reset strings
+    const resetStringsMatch = await bcrypt.compare(
+      reset_string,
+      passwordResetRecord.reset_string
+    );
+
+    if (!resetStringsMatch) {
+      return { error: 'Invalid reset string' };
+    }
+
+    // validate formData (new password)
+    const formDataObject = Object.fromEntries(formData);
+
+    const schema = z
+      .object({
+        password: z
+          .string()
+          .min(1, 'Password is required')
+          .refine(
+            (value) => PASSWORD_REGEX.test(value),
+            'Password must be 8-16 characters long, and contain at least one numeric digit, and special character'
+          ),
+        confirm_password: z.string().min(1, 'Please confirm your password'),
+      })
+      .refine((data) => data.password === data.confirm_password, {
+        path: ['confirm_password'],
+        message: 'Passwords do not match',
+      });
+
+    const { success, error, data } = schema.safeParse(formDataObject);
+
+    if (!success) {
+      console.log('errors', error.flatten().fieldErrors);
+      return { errors: error.flatten().fieldErrors };
+    }
+
+    // reset password
+    const { password } = data;
+
+    const passwordIsSame = await bcrypt.compare(password, user.password);
+
+    console.log('password', password);
+    console.log('user.password', user.password);
+    console.log('passwordIsSame', passwordIsSame);
+
+    if (passwordIsSame) {
+      return { error: 'Password is the same as previous' };
+    }
+
+    await user.save();
+
+    return { success: true };
+  } catch (error: any) {
+    console.log('[PASSWORD_RESET_INITIATION_ERROR]', error);
+    return { error: 'Something went wrong' };
   }
 };

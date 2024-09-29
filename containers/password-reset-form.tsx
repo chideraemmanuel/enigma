@@ -1,6 +1,6 @@
 'use client';
 
-import { loginUser } from '@/actions/auth';
+import { resetPassword } from '@/actions/auth';
 import FormInput from '@/components/form-input';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
@@ -9,13 +9,22 @@ import { FC, useEffect } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { toast } from 'sonner';
 
-interface Props {}
+interface Props {
+  //   searchParams: {
+  //     [key: string]: string | string[];
+  //   };
+  email: string;
+  reset_string: string;
+}
 
-const LoginForm: FC<Props> = () => {
-  const [state, action] = useFormState(loginUser, null);
+const PasswordResetForm: FC<Props> = ({ email, reset_string }) => {
+  const resetPasswordWithCredentials = resetPassword.bind(null, {
+    email,
+    reset_string,
+  });
+  const [state, action] = useFormState(resetPasswordWithCredentials, null);
+
   const router = useRouter();
-
-  console.log('state', state);
 
   useEffect(() => {
     if (state?.error) {
@@ -24,9 +33,8 @@ const LoginForm: FC<Props> = () => {
     }
 
     if (state?.success) {
-      // console.log('state.user', state.data);
-      toast.success('Login successful');
-      router.replace('/profile');
+      toast.success('Password reset successfully');
+      router.replace('/auth/login');
     }
   }, [state]);
 
@@ -34,20 +42,19 @@ const LoginForm: FC<Props> = () => {
     <>
       <form action={action} className="flex flex-col gap-5 mb-3">
         <FormInput
-          label="Username or Email"
-          placeholder="Enter your username or email"
-          name="username"
-          error={state?.errors?.username?.[0]}
+          label="New password"
+          placeholder="Enter your new password"
+          type="password"
+          name="password"
+          error={state?.errors?.password?.[0]}
         />
 
         <FormInput
-          label="Password"
-          placeholder="Enter your password"
-          name="password"
+          label="Confirm new password"
+          placeholder="Confirm your new password"
           type="password"
-          addForgotPassword
-          passwordResetInitiationHref="/auth/reset-password/initiate"
-          error={state?.errors?.password?.[0]}
+          name="confirm_password"
+          error={state?.errors?.confirm_password?.[0]}
         />
 
         <div className="mt-5">
@@ -58,7 +65,7 @@ const LoginForm: FC<Props> = () => {
   );
 };
 
-export default LoginForm;
+export default PasswordResetForm;
 
 const SubmitButton: FC = () => {
   const { pending } = useFormStatus();
@@ -67,7 +74,7 @@ const SubmitButton: FC = () => {
     <>
       <Button className="w-full h-12 text-base" disabled={pending}>
         {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        Login
+        Reset password
       </Button>
     </>
   );

@@ -1,5 +1,6 @@
 import FormInput from '@/components/form-input';
 import { Button } from '@/components/ui/button';
+import PasswordResetInitiationForm from '@/containers/password-reset-initiation-form';
 import getUser from '@/lib/get-user';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
@@ -34,19 +35,7 @@ const PasswordResetInitiationPage: FC<Props> = async () => {
         </header>
 
         {/* form */}
-        <form className="flex flex-col gap-5 mb-3">
-          <FormInput
-            label="Username/Email"
-            placeholder="Enter your username or email"
-          />
-
-          <div className="mt-5">
-            <Button className="w-full h-12 text-base">
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Send reset email
-            </Button>
-          </div>
-        </form>
+        <PasswordResetInitiationForm />
 
         <Button variant={'outline'} asChild className="w-full h-12 text-base">
           <Link href={'/auth/login'}>Go to login page</Link>
@@ -57,3 +46,7 @@ const PasswordResetInitiationPage: FC<Props> = async () => {
 };
 
 export default PasswordResetInitiationPage;
+
+// ! "next-share": "^0.27.0",
+// ! "nodemailer": "^6.9.14",
+// ! "uuid": "^10.0.0"

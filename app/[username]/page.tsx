@@ -13,7 +13,9 @@ interface Props {
 
 const SendMessagePage: FC<Props> = async ({ params: { username } }) => {
   await connectToDatabase();
-  const user = await User.findOne<UserSchemaInterface>({ username });
+  const user = await User.findOne<UserSchemaInterface>({
+    username: username.toLowerCase().trim(),
+  });
 
   if (!user) notFound();
 

@@ -33,6 +33,8 @@ export const updateProfile = async (previousState: any, formData: FormData) => {
         username: z
           .string()
           .min(1, 'Please enter a username')
+          .toLowerCase()
+          .trim()
           .refine(
             (value) => USERNAME_REGEX.test(value),
             'Username must be between 3-15 characters, and can only contain letters and numbers'
@@ -46,6 +48,8 @@ export const updateProfile = async (previousState: any, formData: FormData) => {
           //   (value) => value !== '' && EMAIL_REGEX.test(value),
           //   'Inalid email'
           // )
+          .toLowerCase()
+          .trim()
           .refine(
             (value) => value === '' || EMAIL_REGEX.test(value),
             'Invalid email'
@@ -171,6 +175,8 @@ export const completeOnboarding = async (email?: string) => {
 
     const { success, data, error } = z
       .string()
+      .toLowerCase()
+      .trim()
       .email('Please enter a valid email address')
       .optional()
       .safeParse(email);
