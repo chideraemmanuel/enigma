@@ -6,6 +6,11 @@ import { redirect, RedirectType } from 'next/navigation';
 import React, { FC } from 'react';
 import getUser from '@/lib/get-user';
 import Logo from '@/components/logo';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Create an account',
+};
 
 interface Props {}
 

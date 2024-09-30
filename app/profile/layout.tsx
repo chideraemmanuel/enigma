@@ -4,7 +4,15 @@ import ProfileHeader from '@/containers/profile-header';
 import { getSession } from '@/lib/session';
 import connectToDatabase from '@/lib/connect-to-database';
 import { redirect, RedirectType } from 'next/navigation';
-import { FC, Suspense } from 'react';
+import React, { FC, Suspense } from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Your profile',
+    template: '%s - Enigma',
+  },
+};
 
 interface Props {
   children: React.ReactNode;

@@ -4,9 +4,14 @@ import { Button } from '@/components/ui/button';
 import PasswordResetInitiationForm from '@/containers/password-reset-initiation-form';
 import getUser from '@/lib/get-user';
 import { Loader2 } from 'lucide-react';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect, RedirectType } from 'next/navigation';
 import React, { FC } from 'react';
+
+export const metadata: Metadata = {
+  title: `Reset your account's password`,
+};
 
 interface Props {}
 

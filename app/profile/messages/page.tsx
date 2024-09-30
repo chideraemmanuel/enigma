@@ -13,8 +13,13 @@ import getUser from '@/lib/get-user';
 import { updateSession } from '@/lib/session';
 import updateSessionViaAPI from '@/lib/update-session-via-api';
 import Message, { MessageInterface } from '@/models/message';
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import React, { FC } from 'react';
+
+export const metadata: Metadata = {
+  title: 'Your messages',
+};
 
 interface Props {}
 

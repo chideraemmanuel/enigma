@@ -6,9 +6,14 @@ import getUser from '@/lib/get-user';
 import PasswordReset from '@/models/password-reset';
 import User, { UserInterface } from '@/models/user';
 import { Loader2 } from 'lucide-react';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound, redirect, RedirectType } from 'next/navigation';
 import React, { FC } from 'react';
+
+export const metadata: Metadata = {
+  title: `Reset your account's password`,
+};
 
 interface Props {
   searchParams: {

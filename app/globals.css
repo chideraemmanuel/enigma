@@ -102,13 +102,13 @@ body {
     );
   }
 
-  .bg-gradient-2 {
+  /* .bg-gradient-2 {
     background: radial-gradient(
       circle at 52.1% -29.6%,
       rgb(144, 17, 105) 0%,
       rgb(51, 0, 131) 100.2%
     );
-  }
+  } */
 
   .bg-gradient {
     /* background: linear-gradient(to top, #c471f5 0%, #fa71cd 100%); */

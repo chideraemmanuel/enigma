@@ -8,8 +8,13 @@ import { cn } from '@/lib/helpers/cn';
 import { updateSession } from '@/lib/session';
 import updateSessionViaAPI from '@/lib/update-session-via-api';
 import { Loader2 } from 'lucide-react';
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import React, { FC } from 'react';
+
+export const metadata: Metadata = {
+  title: 'Profile settings',
+};
 
 interface Props {}
 
