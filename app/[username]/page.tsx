@@ -5,7 +5,7 @@ import connectToDatabase from '@/lib/connect-to-database';
 import User, { UserInterface, UserSchemaInterface } from '@/models/user';
 import { Loader2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 interface Props {
   params: { username: string };

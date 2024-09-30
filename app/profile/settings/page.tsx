@@ -9,7 +9,7 @@ import { updateSession } from '@/lib/session';
 import updateSessionViaAPI from '@/lib/update-session-via-api';
 import { Loader2 } from 'lucide-react';
 import { redirect } from 'next/navigation';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 interface Props {}
 

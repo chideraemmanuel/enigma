@@ -5,7 +5,9 @@ import getUser from '@/lib/get-user';
 import { updateSession } from '@/lib/session';
 import updateSessionViaAPI from '@/lib/update-session-via-api';
 import { redirect } from 'next/navigation';
-import { FC } from 'react';
+import React, { FC } from 'react';
+import Link from 'next/link';
+import SocialShare from '@/containers/social-share';
 
 interface Props {}
 
@@ -42,20 +44,11 @@ const ProfilePage: FC<Props> = async () => {
             sed quod accusamus aspernatur voluptates a est.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-7">
-            <div className="flex items-center justify-between gap-5 p-3 md:p-5 h-16 md:h-20 border border-primary rounded-full">
-              <span className="w-[80%] truncate text-sm md:text-base">
-                {/* https://enigma.vercel.app/chidera */}
-                https://enigma.vercel.app/{user.username}
-              </span>
-              <Button className="px-3 md:px-3">Copy link</Button>
-            </div>
-            <Button className="h-16 md:h-20">Share on WhatsApp</Button>
-            <Button className="h-16 md:h-20">Share on WhatsApp</Button>
-            <Button className="h-16 md:h-20">Share on WhatsApp</Button>
-          </div>
+          <SocialShare username={user.username} />
 
-          <Button className="h-16 md:h-20 w-full">View Messages</Button>
+          <Button className="h-16 md:h-20 w-full" asChild>
+            <Link href={'/profile/messages'}>View Messages</Link>
+          </Button>
         </div>
       </div>
     </>

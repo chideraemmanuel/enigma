@@ -3,7 +3,7 @@ import { getSession } from '@/lib/session';
 import connectToDatabase from '@/lib/connect-to-database';
 import Link from 'next/link';
 import { redirect, RedirectType } from 'next/navigation';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import getUser from '@/lib/get-user';
 
 interface Props {}

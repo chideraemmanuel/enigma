@@ -14,7 +14,7 @@ import { updateSession } from '@/lib/session';
 import updateSessionViaAPI from '@/lib/update-session-via-api';
 import Message, { MessageInterface } from '@/models/message';
 import { redirect } from 'next/navigation';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 interface Props {}
 
@@ -31,8 +31,9 @@ const MessagesPage: FC<Props> = async () => {
     // .skip((1 - 1) * 2)
     .limit(messagesFetchLimit)
     .sort({ createdAt: -1 })
-
     .exec();
+
+  // console.log('messagesss', messages);
 
   // total_records
   const total_records = await Message.countDocuments({
@@ -88,7 +89,7 @@ const MessagesPage: FC<Props> = async () => {
                       <CardTitle className="text-lg md:text-xl">
                         Message:
                       </CardTitle>
-                      <CardDescription className="text-base">
+                      <CardDescription className="text-base whitespace-pre-line">
                         {message.message}
                       </CardDescription>
                     </CardHeader>
@@ -114,3 +115,20 @@ const MessagesPage: FC<Props> = async () => {
 };
 
 export default MessagesPage;
+
+// function DisplayText({ text }) {
+//   return <div style={{ whiteSpace: 'pre-line' }}>{text}</div>;
+// }
+
+// function DisplayText({ text }) {
+//   return (
+//     <div>
+//       {text.split('\n').map((line, index) => (
+//         <React.Fragment key={index}>
+//           {line}
+//           <br />
+//         </React.Fragment>
+//       ))}
+//     </div>
+//   );
+// }

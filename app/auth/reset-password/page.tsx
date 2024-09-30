@@ -7,7 +7,7 @@ import User, { UserInterface } from '@/models/user';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { notFound, redirect, RedirectType } from 'next/navigation';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 interface Props {
   searchParams: {

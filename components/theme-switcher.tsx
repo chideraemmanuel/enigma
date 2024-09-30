@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Check, Laptop, Monitor, Moon, Sun } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
