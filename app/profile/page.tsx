@@ -39,9 +39,11 @@ const ProfilePage: FC<Props> = async () => {
 
         <div className="flex-1 bg-secondary dark:bg-slate-900 px-5 md:px-8 py-9 rounded-[16px] border">
           <p className="text-sm sm:text-base md:text-lg text-center text-muted-foreground mb-10 md:mb-20">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita in
-            iure iusto suscipit, molestiae numquam consequatur libero quisquam
-            sed quod accusamus aspernatur voluptates a est.
+            Share your profile link to get anonymous feedback or messages from
+            your friends! You can view responses by clicking on the{' '}
+            <span className="font-semibold">'View messages'</span> button below,
+            or the <span className="font-semibold">'Messages'</span> link on the
+            navigation bar.
           </p>
 
           <SocialShare username={user.username} />

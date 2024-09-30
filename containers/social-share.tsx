@@ -43,7 +43,7 @@ const SocialShare: FC<Props> = ({ username }) => {
           url={`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/${username}`}
         >
           <Button className="flex items-center gap-3 w-full h-16 md:h-20 bg-[#40c351] hover:bg-[#40c351] hover:bg-opacity-90">
-            <WhatsAppIcon />
+            <WhatsAppIcon size={32} />
             <span>Share on WhatsApp</span>
           </Button>
         </WhatsappShareButton>
@@ -52,7 +52,7 @@ const SocialShare: FC<Props> = ({ username }) => {
           url={`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/${username}`}
         >
           <Button className="flex items-center gap-3 w-full h-16 md:h-20 bg-[rgba(3,154,229,0.9)] hover:bg-[rgba(3,154,229,0.8)]">
-            <FacebookIcon />
+            <FacebookIcon size={32} />
             <span>Share on Facebook</span>
           </Button>
         </FacebookShareButton>
@@ -61,7 +61,7 @@ const SocialShare: FC<Props> = ({ username }) => {
           url={`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/${username}`}
         >
           <Button className="flex items-center gap-3 w-full h-16 md:h-20 bg-white text-black hover:bg-white/90">
-            <XIcon />
+            <XIcon size={32} />
             <span>Share on X</span>
           </Button>
         </TwitterShareButton>

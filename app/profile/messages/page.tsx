@@ -68,9 +68,8 @@ const MessagesPage: FC<Props> = async () => {
 
         <div className="flex-1 flex flex-col bg-secondary dark:bg-slate-900 px-5 md:px-8 py-9 rounded-[16px] border">
           <p className="text-sm sm:text-base md:text-lg text-center text-muted-foreground mb-7 md:mb-12">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita in
-            iure iusto suscipit, molestiae numquam consequatur libero quisquam
-            sed quod accusamus aspernatur voluptates a est.
+            Please note that messages will be deleted automatically in 48 hours
+            after they were sent.
           </p>
 
           {messages.length === 0 ? (

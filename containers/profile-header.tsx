@@ -17,7 +17,7 @@ import { cn } from '@/lib/helpers/cn';
 import { LogOutIcon, User2, User2Icon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { FC, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { toast } from 'sonner';
 
@@ -33,9 +33,12 @@ const ProfileHeader: FC<Props> = ({ avatar }) => {
       <header className="border-b h-14 md:h-[70px] sticky top-0 z-20 bg-background">
         <div className="md:container px-3 h-full flex items-center gap-5">
           <div className="flex-1 flex items-center gap-4 md:gap-10">
-            <span className="text-lg md:text-xl font-semibold font-geistMono">
+            <Link
+              href={'/'}
+              className="text-lg md:text-xl font-semibold font-geistMono text-transparent text-gradient dark:bg-gradient bg-clip-text dark:bg-clip-text"
+            >
               Enigma
-            </span>
+            </Link>
 
             <ul className="flex items-center gap-2 md:gap-3">
               {NAVIGATION_LINKS.map((link, index) => (
