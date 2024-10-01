@@ -11,6 +11,7 @@ import React, { FC } from 'react';
 
 export const metadata: Metadata = {
   title: `Reset your account's password`,
+  description: '', // remove root description (and OG description)
 };
 
 interface Props {}

@@ -19,6 +19,7 @@ import React, { FC } from 'react';
 
 export const metadata: Metadata = {
   title: 'Your messages',
+  description: '', // remove root description (and OG description)
 };
 
 interface Props {}

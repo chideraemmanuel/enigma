@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     default: 'Your profile',
     template: '%s - Enigma',
   },
+  description: '', // remove root description (and OG description)
 };
 
 interface Props {

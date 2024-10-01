@@ -17,11 +17,20 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Enigma | Lorem ipsum dolor sit amet',
+    default: 'Get Anonymous Feedback - Enigma',
     template: '%s - Enigma',
   },
-  description: '',
-  keywords: '',
+  description:
+    'Sign up to create your own profile and receive anonymous feedback or messages from friends. Share your link and get insights without revealing identities. Perfect for open conversations and fun interactions.',
+  keywords:
+    'anonymous feedback, anonymous messages, feedback tool, anonymous messaging, feedback link, share link, receive messages, anonymous questions, honesty tool, open communication',
+  openGraph: {
+    title: 'Receive Honest Feedback Anonymously with Enigma',
+    description:
+      'Create a profile on Enigma and share your link to receive anonymous feedback from friends and followers.',
+    // url: 'https://enigmaa.vercel.app',
+    url: `${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}`,
+  },
 };
 
 export default function RootLayout({

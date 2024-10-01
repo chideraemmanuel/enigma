@@ -10,6 +10,8 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Create an account',
+  description:
+    'Sign up to create your own profile and receive anonymous feedback or messages from friends. Share your link and get insights without revealing identities.',
 };
 
 interface Props {}
