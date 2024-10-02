@@ -84,23 +84,29 @@ const MessagesPage: FC<Props> = async () => {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-[repeat(auto-fill,_minmax(370px,_1fr))] gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-3">
                 {messages.map((message) => (
                   <Card
                     key={message._id as string}
                     className="flex flex-col justify-between min-h-[170px] md:min-h-[200px]"
                   >
                     <CardHeader className="p-4 md:p-6">
-                      <CardTitle className="text-lg md:text-xl">
+                      {/* <CardTitle className="text-lg md:text-xl">
                         Message:
                       </CardTitle>
                       <CardDescription className="text-base whitespace-pre-line">
                         {message.message}
+                      </CardDescription> */}
+                      <CardDescription className="text-base whitespace-pre-line">
+                        Message:
                       </CardDescription>
+                      <CardTitle className="text-lg md:text-xl">
+                        {message.message}
+                      </CardTitle>
                     </CardHeader>
 
                     <CardFooter className="p-4 md:p-6">
-                      <span className="text-sm font-medium">
+                      <span className="text-sm font-medium text-muted-foreground">
                         {/* 27 September, 2024 at 2:17 PM */}
                         {/* {message.createdAt.toLocaleString()} */}
                         {dateFormatter.format(message.createdAt)}

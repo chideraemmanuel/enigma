@@ -22,7 +22,7 @@ const SendMessagePage: FC<Props> = async ({ params: { username } }) => {
 
   return (
     <>
-      <div className="flex items-center justify-center bg-purple-300 px-4 py-14 min-h-screen">
+      <div className="flex items-center justify-center bg-gradient px-4 py-14 min-h-screen">
         <div className="w-[min(700px,_100%)] bg-background rounded-3xl">
           <div className="px-4 sm:px-6 py-10 sm:py-12">
             {/* header */}

@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Enigma
 
-## Getting Started
+A fun and simple platform where users can receive anonymous feedback and messages from friends, followers, or anyone with a link. Create your profile, share your link, and discover what people have to say—completely anonymous and all in good fun!
 
-First, run the development server:
+## Overview
+
+This repository contains the source code for **_Enigma_**, an anonymous feedback web application. It allows users to create a profile, share a link, and receive anonymous messages or feedback from others. <br />
+The application was built using Next.js, making use of **server components** and **server actions** for optimized performance and seamless server-side functionalities.
+
+<!-- ## Live Demo
+
+Check out the live demo of the application [here](). -->
+
+## Features
+
+- **Anonymous Feedback** - Share a unique link to receive anonymous messages or feedback from anyone.
+- **Easy Link Sharing** - Effortlessly share your profile link across platforms to start receiving feedback.
+- **Secure Authentication** - Protect your profile with secure login and user authentication.
+
+## Techologies Used
+
+- **Frontend & Backend**:
+
+  - **Next.js**: Fullstack framework used for both frontend and backend APIs, enabling server-side rendering, static generation, and API routes for efficient data fetching.
+
+- **UI Components & Styling**:
+
+  - **Radix UI**: A library of accessible, unstyled UI primitives, giving you control over styling while maintaining accessibility.
+  - **Tailwind CSS**: Utility-first CSS framework for rapid design and responsive layouts.
+
+- **State Management & Forms**:
+
+  - **React Query**: Used for managing server-side data fetching, caching, and synchronization.
+  - **React Hook Form**: Lightweight library for handling forms and validation with a flexible API.
+
+- **Authentication**:
+
+  - **Session-based Authentication**: Implemented with Next.js and database sessions to securely manage user authentication.
+
+- **Email Service**:
+
+  - **Nodemailer**: A module for Node.js used to send emails from the application, used for password reset implementation.
+
+- **Database**:
+
+  - **MongoDB**: NoSQL database for storing user profiles, links, and session data.
+  - **Mongoose**: ODM library to interact with MongoDB, providing schema-based data models.
+
+<!-- ## Installation and Usage -->
+
+## Running the Application Locally
+
+### Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- **Node.js**: Make sure you have Node.js installed on your machine.
+- **MongoDB**: You will need a MongoDB database to store user profiles and links. You can run MongoDB locally on your machine or use a cloud provider like MongoDB Atlas.
+
+- **Nodemailer Configuration**: If you intend to use Nodemailer for sending emails, you may need SMTP credentials from your email provider, which should also be added to your `.env.local` file.
+
+### Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/chideraemmanuel/enigma.git
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+### Configuration
+
+#### Environment variables
+
+To configure the environment variables, please refer to the `.env.example` file located in the root of the project. This file contains all the necessary environment variables you need to set up. Simply create a `.env.local` file based on the example and update the values as required for your environment.
+
+### Running the Application
+
+1. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Access the application: Open your web browser and go to [http://localhost:3000](http://localhost:3000) to view the application.

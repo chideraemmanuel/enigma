@@ -50,6 +50,7 @@ const MessageForm: FC<Props> = ({ userId }) => {
           name="message"
           error={state?.errors?.[0]}
           ref={ref}
+          maxLength={250}
         />
 
         <SubmitButton />

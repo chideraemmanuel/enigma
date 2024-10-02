@@ -41,6 +41,7 @@ const SocialShare: FC<Props> = ({ username }) => {
 
         <WhatsappShareButton
           url={`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/${username}`}
+          title="Send an anonymous message to me on Enigma. 🤭😏👀"
         >
           <Button className="flex items-center gap-3 w-full h-16 md:h-20 bg-[#40c351] hover:bg-[#40c351] hover:bg-opacity-90">
             <WhatsAppIcon size={32} />
@@ -50,6 +51,7 @@ const SocialShare: FC<Props> = ({ username }) => {
 
         <FacebookShareButton
           url={`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/${username}`}
+          title="Send an anonymous message to me on Enigma. 🤭😏👀"
         >
           <Button className="flex items-center gap-3 w-full h-16 md:h-20 bg-[rgba(3,154,229,0.9)] hover:bg-[rgba(3,154,229,0.8)]">
             <FacebookIcon size={32} />
@@ -59,6 +61,7 @@ const SocialShare: FC<Props> = ({ username }) => {
 
         <TwitterShareButton
           url={`${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/${username}`}
+          title="Send an anonymous message to me on Enigma. 🤭😏👀"
         >
           <Button className="flex items-center gap-3 w-full h-16 md:h-20 bg-white text-black hover:bg-white/90">
             <XIcon size={32} />

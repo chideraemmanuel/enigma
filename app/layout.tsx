@@ -17,7 +17,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Get Anonymous Feedback - Enigma',
+    default: 'Get Anonymous Feedback and Messages - Enigma',
     template: '%s - Enigma',
   },
   description:
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   keywords:
     'anonymous feedback, anonymous messages, feedback tool, anonymous messaging, feedback link, share link, receive messages, anonymous questions, honesty tool, open communication',
   openGraph: {
-    title: 'Receive Honest Feedback Anonymously with Enigma',
+    title: 'Receive Feedback and Messages Anonymously with Enigma',
     description:
       'Create a profile on Enigma and share your link to receive anonymous feedback from friends and followers.',
     // url: 'https://enigmaa.vercel.app',

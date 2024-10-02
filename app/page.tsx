@@ -44,11 +44,11 @@ export default function Home() {
 
           <div className="flex-1 flex flex-col items-center justify-center gap-5 text-center">
             {/* <h1 className="text-4xl sm:text-5xl md:text-6xl text-[hsl(224,_71.4%,_4.1%)]"> */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl text-transparent text-gradient bg-clip-text">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl text-transparent text-gradient bg-clip-text font-semibold">
               Get Honest Feedback, Anonymously
             </h1>
 
-            <p className="text-[hsl(220,_8.9%,_46.1%)] text-sm sm:text-base md:text-lg md:w-[80%]">
+            <p className="text-[hsl(220,_8.9%,_46.1%)] text-sm sm:text-base md:text-lg md:w-[80%] font-medium">
               Create your profile, share your link, and receive anonymous
               feedback or messages from friends and followers. See what they
               have to say – all in good fun and completely anonymous!

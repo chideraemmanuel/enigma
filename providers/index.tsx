@@ -20,7 +20,7 @@ interface Props {
 const Providers: FC<Props> = ({ children }) => {
   return (
     <>
-      <ThemeProvider>
+      <ThemeProvider defaultTheme="dark">
         <Toaster richColors position="top-center" />
         {children}
       </ThemeProvider>
