@@ -1,6 +1,6 @@
 # Enigma
 
-A fun and simple platform where users can receive anonymous feedback and messages from friends, followers, or anyone with a link. Create your profile, share your link, and discover what people have to say—completely anonymous and all in good fun!
+A fun and simple platform where users can receive anonymous feedback and messages from friends, followers, or anyone with their link. Create your profile, share your link, and discover what people have to say — completely anonymous!
 
 ## Overview
 
@@ -27,11 +27,6 @@ Check out the live demo of the application [here](). -->
 
   - **Radix UI**: A library of accessible, unstyled UI primitives, giving you control over styling while maintaining accessibility.
   - **Tailwind CSS**: Utility-first CSS framework for rapid design and responsive layouts.
-
-- **State Management & Forms**:
-
-  - **React Query**: Used for managing server-side data fetching, caching, and synchronization.
-  - **React Hook Form**: Lightweight library for handling forms and validation with a flexible API.
 
 - **Authentication**:
 
