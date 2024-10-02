@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: '', // remove root description (and OG description)
 };
 
+export const dynamic = 'force-dynamic';
+
 interface Props {}
 
 const SettingsPage: FC<Props> = async () => {

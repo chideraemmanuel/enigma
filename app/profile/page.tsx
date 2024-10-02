@@ -9,6 +9,8 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import SocialShare from '@/containers/social-share';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {}
 
 const ProfilePage: FC<Props> = async () => {
