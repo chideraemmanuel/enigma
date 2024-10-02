@@ -7,9 +7,9 @@ A fun and simple platform where users can receive anonymous feedback and message
 This repository contains the source code for **_Enigma_**, an anonymous feedback web application. It allows users to create a profile, share a link, and receive anonymous messages or feedback from others. <br />
 The application was built using Next.js, making use of **server components** and **server actions** for optimized performance and seamless server-side functionalities.
 
-<!-- ## Live Demo
+## Live Demo
 
-Check out the live demo of the application [here](). -->
+Check out the live demo of the application [here](https://enigmaa.vercel.app/).
 
 ## Features
 
