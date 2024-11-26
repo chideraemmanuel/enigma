@@ -103,8 +103,11 @@ export const registerUser = async (previousState: any, formData: FormData) => {
     });
 
     cookies().set('session_id', new_session_id, {
-      maxAge: 60 * 60, // 1 hour
+      maxAge: 60 * 60 * 24, // 24 hours
       httpOnly: true,
+      ...(process.env.NODE_ENV === 'production' && {
+        secure: true,
+      }),
     });
 
     // redirect('/profile');
@@ -178,8 +181,11 @@ export const loginUser = async (previousState: any, formData: FormData) => {
     });
 
     cookies().set('session_id', new_session_id, {
-      maxAge: 60 * 60, // 1 hour
+      maxAge: 60 * 60 * 24, // 24 hours
       httpOnly: true,
+      ...(process.env.NODE_ENV === 'production' && {
+        secure: true,
+      }),
     });
 
     // revalidatePath('/auth/login');

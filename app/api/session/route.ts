@@ -27,8 +27,11 @@ export const PUT = async (request: NextRequest) => {
     );
 
     cookies().set('session_id', session_id, {
-      maxAge: 60 * 60, // 1 hour
+      maxAge: 60 * 60 * 24, // 24 hours
       httpOnly: true,
+      ...(process.env.NODE_ENV === 'production' && {
+        secure: true,
+      }),
     });
 
     // const response = NextResponse.json({

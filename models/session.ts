@@ -28,7 +28,7 @@ const sessionSchema: Schema<SessionSchemaInterface> = new Schema(
       type: Date,
       // default: () => Date.now(),
       // expires: 60 * 60,
-      default: () => Date.now() + 1000 * 60 * 60,
+      default: () => Date.now() + 1000 * 60 * 60 * 24,
       expires: 0,
       // immutable: true,
     },
